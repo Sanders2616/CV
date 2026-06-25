@@ -1,0 +1,78 @@
+---
+import { person, techStack } from '../data/content';
+
+const phraseTop = `${person.roles.join(' · ')} · ${person.availability} · `;
+const phraseBottom = `${techStack.join(' · ')} · `;
+---
+
+<div class="marquee" aria-hidden="true">
+  <div class="marquee-track marquee-top">
+    <span>{phraseTop}</span>
+    <span>{phraseTop}</span>
+    <span>{phraseTop}</span>
+    <span>{phraseTop}</span>
+  </div>
+  <div class="marquee-track marquee-bottom">
+    <span>{phraseBottom}</span>
+    <span>{phraseBottom}</span>
+    <span>{phraseBottom}</span>
+    <span>{phraseBottom}</span>
+  </div>
+</div>
+
+<style>
+  .marquee {
+    overflow: hidden;
+    background: var(--color-bg2);
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.03) inset;
+    padding-block: 0.7rem;
+    transform: rotate(-1deg) scale(1.03);
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+  .marquee-track {
+    display: flex;
+    width: max-content;
+  }
+  .marquee-top {
+    animation: scroll-left 26s linear infinite;
+  }
+  .marquee-bottom {
+    animation: scroll-right 32s linear infinite;
+  }
+  .marquee-track span {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    white-space: nowrap;
+    padding-inline: 1.2rem;
+  }
+  .marquee-top span {
+    font-size: clamp(1.1rem, 2.6vw, 1.6rem);
+    color: transparent;
+    -webkit-text-stroke: 1px rgba(244, 238, 246, 0.5);
+  }
+  .marquee-top span:nth-child(odd) {
+    color: var(--color-accent2);
+    -webkit-text-stroke: 0;
+  }
+  .marquee-bottom span {
+    font-family: var(--font-mono);
+    font-size: clamp(0.75rem, 1.4vw, 0.95rem);
+    color: var(--color-muted);
+  }
+  .marquee-bottom span:nth-child(odd) {
+    color: var(--color-accent3);
+  }
+  @keyframes scroll-left {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+  @keyframes scroll-right {
+    from { transform: translateX(-50%); }
+    to { transform: translateX(0); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .marquee-track { animation: none; }
+  }
+</style>

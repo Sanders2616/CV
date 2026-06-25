@@ -1,0 +1,1 @@
+import{w as e}from"./client.CD6R8Z-b.js";e();

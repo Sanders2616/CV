@@ -1,0 +1,28 @@
+---
+import { person } from '../data/content';
+const year = new Date().getFullYear();
+---
+
+<footer class="footer">
+  <div class="container footer-inner">
+    <span>✦ {person.fullName}</span>
+    <span>{person.roles.join(' · ')} · {year}</span>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    background: var(--color-bg2);
+    box-shadow: 0 -6px 18px var(--neu-dark) inset;
+    padding-block: 1.6rem;
+  }
+  .footer-inner {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--color-muted);
+  }
+</style>

@@ -1,0 +1,123 @@
+---
+import { techStack, aiTools, designSystems } from '../data/content';
+---
+
+<section id="stack" class="section section-alt">
+  <span class="section-num">04</span>
+  <div class="container">
+    <div class="reveal">
+      <span class="section-label">Stack</span>
+      <h2 class="section-title">Herramientas del día a día</h2>
+    </div>
+
+    <div class="stack-grid-wrap">
+      <div class="stack-block">
+        <h3 class="block-title">Tech Stack</h3>
+        <div class="stack-grid">
+          {techStack.map((s, i) => (
+            <span class="stack-item reveal" style={`--reveal-delay: ${(i % 6) * 60}ms`}>{s}</span>
+          ))}
+        </div>
+      </div>
+
+      <div class="stack-block">
+        <h3 class="block-title">AI & Orquestación</h3>
+        <div class="ai-tools">
+          {aiTools.map((t, i) => (
+            <div class="ai-tool reveal" style={`--reveal-delay: ${i * 70}ms`}>
+              <strong>{t.name}</strong>
+              <span>{t.description}</span>
+            </div>
+          ))}
+        </div>
+
+        <h3 class="block-title block-title-spaced">Design Systems</h3>
+        <div class="ds-grid">
+          {designSystems.map((d, i) => (
+            <span class="ds-badge reveal" style={`--reveal-delay: ${i * 70}ms`}>{d.name}</span>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .section-alt {
+    background: var(--color-bg2);
+  }
+  .stack-grid-wrap {
+    margin-top: 2.5rem;
+    display: grid;
+    grid-template-columns: 1.3fr 1fr;
+    gap: 2.5rem;
+  }
+  .block-title {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-accent2);
+    margin-bottom: 1rem;
+  }
+  .block-title-spaced {
+    margin-top: 1.8rem;
+  }
+  .stack-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.6rem;
+  }
+  .stack-item {
+    background: var(--color-bg2);
+    border-radius: 12px;
+    padding: 0.6rem 0.8rem;
+    font-size: 0.82rem;
+    text-align: center;
+    box-shadow: 5px 5px 11px var(--neu-dark), -5px -5px 11px var(--neu-light);
+    transition: box-shadow 0.2s ease, transform 0.2s ease;
+  }
+  .stack-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 7px 7px 15px var(--neu-dark), -7px -7px 15px var(--neu-light);
+  }
+  .ai-tools {
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+  }
+  .ai-tool {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    background: var(--color-bg2);
+    border-radius: 14px;
+    padding: 0.8rem 1rem;
+    box-shadow: 6px 6px 13px var(--neu-dark), -6px -6px 13px var(--neu-light);
+  }
+  .ai-tool strong {
+    font-size: 0.85rem;
+    color: var(--color-text);
+  }
+  .ai-tool span {
+    font-size: 0.78rem;
+    color: var(--color-muted);
+  }
+  .ds-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+  }
+  .ds-badge {
+    background: var(--color-bg2);
+    border-radius: 100px;
+    padding: 0.4rem 0.9rem;
+    font-size: 0.78rem;
+    color: var(--color-muted);
+    box-shadow: inset 2px 2px 5px var(--neu-dark), inset -2px -2px 5px var(--neu-light);
+  }
+  @media (max-width: 760px) {
+    .stack-grid-wrap { grid-template-columns: 1fr; }
+    .stack-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+</style>

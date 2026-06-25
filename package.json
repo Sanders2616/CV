@@ -1,0 +1,20 @@
+{
+  "name": "sandra-aguilar-portfolio",
+  "type": "module",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "sync": "astro sync"
+  },
+  "dependencies": {
+    "astro": "^7.0.2",
+    "@astrojs/svelte": "^9.0.0",
+    "@astrojs/sitemap": "^3.7.3",
+    "svelte": "^5.56.4",
+    "tailwindcss": "^4.3.1",
+    "@tailwindcss/vite": "^4.3.1"
+  }
+}

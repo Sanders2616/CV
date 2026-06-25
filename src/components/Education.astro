@@ -1,0 +1,48 @@
+---
+import { education } from '../data/content';
+---
+
+<section id="education" class="section">
+  <span class="section-num">05</span>
+  <div class="container">
+    <div class="reveal">
+      <span class="section-label">Formación</span>
+      <h2 class="section-title">Aprendizaje constante</h2>
+    </div>
+
+    <div class="edu-grid">
+      {education.map((e, i) => (
+        <div class="edu-item neu-card reveal" style={`--reveal-delay: ${(i % 2) * 100}ms`}>
+          <strong>{e.title}</strong>
+          <p>{e.detail}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .edu-grid {
+    margin-top: 2.5rem;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+  .edu-item {
+    padding: 1.2rem 1.4rem;
+  }
+  .edu-item strong {
+    display: block;
+    font-size: 0.95rem;
+    color: #fff;
+    margin-bottom: 4px;
+  }
+  .edu-item p {
+    font-size: 0.85rem;
+    color: var(--color-muted);
+    line-height: 1.55;
+  }
+  @media (max-width: 760px) {
+    .edu-grid { grid-template-columns: 1fr; }
+  }
+</style>

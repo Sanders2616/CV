@@ -1,0 +1,81 @@
+---
+import '../styles/global.css';
+import { person, about } from '../data/content';
+import CustomCursor from '../components/CustomCursor.svelte';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = `${person.fullName} — ${person.roles.join(' · ')}`,
+  description = person.headline
+} = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: person.fullName,
+  jobTitle: person.roles.join(' / '),
+  description: about.paragraph,
+  email: `mailto:${person.email}`,
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: 'Xicotepec, Puebla',
+    addressCountry: 'MX'
+  },
+  knowsLanguage: person.languages.map((l) => l.label),
+  sameAs: [person.linkedin.href]
+};
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="canonical" href={canonicalURL} />
+
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="author" content={person.fullName} />
+    <meta name="robots" content="index, follow" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:locale" content="es_MX" />
+    <meta property="og:image" content={new URL('/og-image.png', Astro.site)} />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={new URL('/og-image.png', Astro.site)} />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Quicksand:wght@500;600;700&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap"
+      rel="stylesheet"
+    />
+
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  </head>
+  <body>
+    <div id="scroll-progress" aria-hidden="true"></div>
+    <CustomCursor client:load />
+    <slot />
+    <script src="../scripts/reveal.js"></script>
+    <script src="../scripts/tilt.js"></script>
+    <script src="../scripts/magnetic.js"></script>
+    <script src="../scripts/scroll-progress.js"></script>
+    <script src="../scripts/counters.js"></script>
+  </body>
+</html>

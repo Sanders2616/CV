@@ -1,0 +1,97 @@
+---
+import { person } from '../data/content';
+
+const navLinks = [
+  { href: '#about', label: 'Sobre mí' },
+  { href: '#experience', label: 'Experiencia' },
+  { href: '#data', label: 'Backend & Datos' },
+  { href: '#stack', label: 'Stack' },
+  { href: '#contact', label: 'Contacto' }
+];
+---
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a href="#top" class="logo">
+      Sandra<span class="gradient-text">.</span>
+    </a>
+    <nav class="nav">
+      {navLinks.map((l) => (
+        <a href={l.href}>{l.label}</a>
+      ))}
+    </nav>
+    <a class="status-badge" href={`mailto:${person.email}`}>
+      <span class="status-dot"></span>
+      {person.availability}
+    </a>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    backdrop-filter: blur(14px);
+    background: color-mix(in srgb, var(--color-bg) 75%, transparent);
+    box-shadow: 0 6px 18px var(--neu-dark);
+  }
+  .header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    padding-block: 0.9rem;
+  }
+  .logo {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 1.2rem;
+    color: #fff;
+    flex-shrink: 0;
+  }
+  .nav {
+    display: flex;
+    gap: 1.6rem;
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--color-muted);
+  }
+  .nav a {
+    transition: color 0.2s ease;
+  }
+  .nav a:hover {
+    color: var(--color-accent2);
+  }
+  .status-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(236, 72, 153, 0.1);
+    box-shadow: inset 2px 2px 5px var(--neu-dark), inset -2px -2px 5px var(--neu-light);
+    border-radius: 100px;
+    padding: 5px 12px;
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    color: #f9a8d4;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .status-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--color-green);
+    box-shadow: 0 0 8px var(--color-green);
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(0.8); }
+  }
+  @media (max-width: 760px) {
+    .nav { display: none; }
+  }
+</style>
